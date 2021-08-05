@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     FormsModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule
     
     
   ],

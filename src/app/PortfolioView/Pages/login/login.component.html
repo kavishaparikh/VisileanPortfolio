@@ -1,16 +1,28 @@
-<mat-card>
-    <img src="../../../../assets/Images/logo.png" alt="Visilean Logo">
-    <h1>Login to your account</h1>
-    
-    <p>
+<div fxLayoutAlign="center center" fxFlexFill>
+<mat-card fxFlex="25" class="loginCard">
+    <img src="../../../../assets/Images/logo.png" alt="Visilean Logo" class="img-fluid ">
+  <from fxLayoutAlign="center center" fxLayout="column">
+    <h1  *ngIf="hideShowLoginContent"class="loginText">Login to your account</h1>
+    <h1  *ngIf="!hideShowLoginContent"class="loginText">Welcome</h1>
+    <div class="inputField" *ngIf="hideShowLoginContent"> 
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
-          <input matInput placeholder="Username">
+          <input matInput placeholder="Username" >
           <mat-icon matSuffix>person</mat-icon>
-          <!-- <mat-hint>Min 8 char 1 number and 1 alpha</mat-hint> -->
         </mat-form-field>
-      </p>
-      <button mat-raised-button color="primary">Next</button>
-
+      </div>
+      <div class="inputField" *ngIf="!hideShowLoginContent">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" >
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <!-- <mat-hint *ngIf="!passwordInput.value">Enter your password</mat-hint> -->
+      </mat-form-field>
+      <p fxLayoutAlign="end">Forgot your password?</p>
+      <button *ngIf="!hideShowLoginContent"mat-raised-button class="btn-block loginBtn" >Submit</button>
+      </div>
+      <button *ngIf="hideShowLoginContent" (click)="showPasswordValidationPage()" mat-raised-button class="btn-block loginBtn" >Next</button>
+    </from>
 </mat-card>
+</div>
 
