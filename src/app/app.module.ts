@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AuthGuard } from './Guard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     
     
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
