@@ -13,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthGuard } from './Guard/auth.guard';
+import { HttpClientModule} from "@angular/common/http";
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { AuthGuard } from './Guard/auth.guard';
     FormsModule,
     MatButtonModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule
+
     
     
   ],

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { threadId } from 'worker_threads';
+import { Observable } from 'rxjs';
+
 
 
 @Injectable({
@@ -11,8 +12,9 @@ private _loginUrl=""
 
   constructor(private http:HttpClient) { }
 
-    // loginUser(user)
-    // {
-    //   return this
-    // }
+  validateUser(username:any, password:any):Observable<any>{    
+    var body = "?password=" + encodeURIComponent(password) + "&username=" + username;    
+    return this.http.post(this._loginUrl+body, body, { observe: "response" });
+  }
+
 }
