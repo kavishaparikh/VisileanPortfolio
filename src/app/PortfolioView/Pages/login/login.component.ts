@@ -30,15 +30,22 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     // this.myerr = "";
-    localStorage.removeItem("Token");
-    localStorage.removeItem("isLoggedIn");
+    // localStorage.removeItem("Token");
+    // localStorage.removeItem("isLoggedIn");
     this.loginForm = this.formBuilder.group({
       username: new FormControl("", Validators.required),
       password: new FormControl("", Validators.required)
+      
     });
-    console.log("Hello from login")
+
+    console.log("Hello from login",this.username  ,this.password)
   }
+
+  onSubmit(){
+    console.log(this.username,"gfyut");
+} 
   checkData() {
+    console.log(this.username,"gfyut");
     var password:any = this.f.password.hasError("required");
     var user:any = this.f.username.hasError("required");
     
@@ -59,12 +66,15 @@ export class LoginComponent implements OnInit {
 
 
   login() {
+    console.log("ddd")
     this.authenticationService
     .validateUser(this.f.username.value, this.f.password.value)
       .subscribe((user:any)=> {
         localStorage.setItem("isLoggedIn", "true");
         var role = user.body.authorities[0].name;
-        if (role === "ROLE_SYS_ADMIN" || role ==="ROLE_TECHNICAL_SUPPORT"||role==="ROLE_CUSTOMER_ADMIN"||role==="ROLE_PROJECT_ADMIN") {
+        
+        if (role === "ROLE_SYS_ADMIN" || role ==="ROLE_TECHNICAL_SUPPORT"||role==="ROLE_CUSTOMER_ADMIN"||role==="ROLE_PROJECT_ADMIN"||role==="USER"||role==="MODRATOR"||role==="ADMIN") {
+          console.log("ddd")
           var token = user.headers.get("x-auth-token");
           localStorage.setItem("Token", token);
           localStorage.setItem("device", "app")

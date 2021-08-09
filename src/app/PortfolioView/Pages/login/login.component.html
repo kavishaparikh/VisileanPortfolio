@@ -1,13 +1,14 @@
 <div fxLayoutAlign="center center" fxFlexFill>
 <mat-card fxFlex="25" class="loginCard">
     <img src="../../../../assets/Images/logo.png" alt="Visilean Logo" class="img-fluid ">
-  <from fxLayoutAlign="center center" fxLayout="column"  [formGroup]='loginForm' autocomplete="off">
-    <h1  *ngIf="hideShowLoginContent"class="loginText">Login to your account</h1>
+ 
+    <h1  *ngIf="hideShowLoginContent"class="loginText">Login to your account</h1>   
     <h1  *ngIf="!hideShowLoginContent"class="loginText">Welcome</h1>
+    <from fxLayoutAlign="center center" fxLayout="column"  [formGroup]='loginForm' autocomplete="off" (ngSubmit)='onSubmit()'>
     <div class="inputField" *ngIf="hideShowLoginContent"> 
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
-          <input matInput placeholder="Username" formControlName="username" (keyup)="checkData()">
+          <input matInput placeholder="Username" formControlName="username" (keyup)="checkData()" >
           <mat-icon matSuffix>person</mat-icon>
           <mat-error *ngIf="f.username.hasError('required')">
             User Name is <strong>required</strong>

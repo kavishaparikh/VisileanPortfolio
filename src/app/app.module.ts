@@ -14,12 +14,15 @@ import {MatButtonModule} from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthGuard } from './Guard/auth.guard';
 import { HttpClientModule} from "@angular/common/http";
+import { DashboardComponent } from './PortfolioView/Pages/dashboard/dashboard.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    DashboardComponent,
   
   ],
   imports: [
