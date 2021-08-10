@@ -8,13 +8,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-private _loginUrl="http://192.168.0.118:8080/api/auth/signin"
+private _loginUrl="http://192.168.0.118:8083/api/auth/signin"
 
   constructor(private http:HttpClient) { }
 
   validateUser(username:any, password:any):Observable<any>{    
-    var body = "?password=" + encodeURIComponent(password) + "&username=" + username;    
-    return this.http.post(this._loginUrl+body, body, { observe: "response" });
+    return this.http.post(this._loginUrl,{username:username,password:password}, { observe: "response" }); 
   }
 
 }

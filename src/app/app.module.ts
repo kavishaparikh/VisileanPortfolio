@@ -15,6 +15,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthGuard } from './Guard/auth.guard';
 import { HttpClientModule} from "@angular/common/http";
 import { DashboardComponent } from './PortfolioView/Pages/dashboard/dashboard.component';
+// import { LoginFormComponent } from './PortfolioView/Pages/login-form/login-form.component';
 
 
 
@@ -22,8 +23,8 @@ import { DashboardComponent } from './PortfolioView/Pages/dashboard/dashboard.co
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
-  
+    DashboardComponent
+    // LoginFormComponent  
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@
  
     <h1  *ngIf="hideShowLoginContent"class="loginText">Login to your account</h1>   
     <h1  *ngIf="!hideShowLoginContent"class="loginText">Welcome</h1>
-    <from fxLayoutAlign="center center" fxLayout="column"  [formGroup]='loginForm' autocomplete="off" (ngSubmit)='onSubmit()'>
+    <form fxLayoutAlign="center center" fxLayout="column"  [formGroup]='loginForm' autocomplete="off" (ngSubmit)='onSubmit()'>
     <div class="inputField" *ngIf="hideShowLoginContent"> 
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
@@ -25,10 +25,10 @@
         </mat-error>
       </mat-form-field>
       <p fxLayoutAlign="end">Forgot password?</p>
-      <button *ngIf="!hideShowLoginContent"mat-raised-button class="btn-block loginBtn" >Submit</button>
+      <button (click)="login()" *ngIf="!hideShowLoginContent"mat-raised-button class="btn-block loginBtn" >Submit</button>
       </div>
-      <button *ngIf="hideShowLoginContent" (click)="showPasswordValidationPage()" mat-raised-button class="btn-block loginBtn" >Next</button>
-    </from>
+      <button type="submit" (click)="showPasswordValidationPage()" *ngIf="hideShowLoginContent"  mat-raised-button class="btn-block loginBtn" >Next</button>
+    </form>
 </mat-card>
 </div>
 
