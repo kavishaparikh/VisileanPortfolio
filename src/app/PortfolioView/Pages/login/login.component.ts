@@ -31,9 +31,13 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private connErr: GlobalErrorHandlerService,
     private http: HttpClient  ,
-    // private _snackBar: MatSnackBar,
+    private _snackBar: MatSnackBar,
 
-  ) {}
+  ) {
+    this.connErr.errorEvent.subscribe((result) => {
+      this.myerr = result;
+    })
+  }
 
   showPasswordValidationPage() {
     this.hideShowLoginContent = this.hideShowLoginContent ? false : true;
@@ -103,17 +107,17 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl(this.navigateTo);
           localStorage.removeItem('backUrl');
         }
-          // else {
-          //   this.myerr = "You are not Authenticated User.";
-          //   this.openSnackBar();
-          // }
+          else {
+            this.myerr = "You are not Authenticated User.";
+            this.openSnackBar();
+          }
       });
   }
-  // openSnackBar() {
-  //   this._snackBar.open("You are not Authenticated User.", "Sorry", {
-  //     duration: 2000,
-  //     horizontalPosition: "right",
-  //     verticalPosition: "bottom",
-  //   });
-  // }
+  openSnackBar() {
+    this._snackBar.open("You are not Authenticated User.", "Sorry", {
+      duration: 2000,
+      horizontalPosition: "right",
+      verticalPosition: "bottom",
+    });
+  }
 }

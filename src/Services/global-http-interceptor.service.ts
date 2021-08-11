@@ -9,7 +9,7 @@ import {
 import { Observable, of, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { MatSnackBar} from "@angular/material/snack-bar";
 import { GlobalErrorHandlerService } from "./global-error-handler.service";
 
 @Injectable({
@@ -32,9 +32,11 @@ export class GlobalHttpInterceptorService {
      var token :any= localStorage.getItem("Token");
      console.log(token,"ttt")
      let headers:any = new HttpHeaders();  
-    headers = headers.append("x-auth-token", token);
+    headers = headers.append("Authorization", `Bearer ${token}`);
     headers.set('content-type', undefined);
-      
+        
+    
+
     if (token !== null) {
       this.login = false;
       req = req.clone({ headers });
@@ -53,42 +55,43 @@ export class GlobalHttpInterceptorService {
           {
             console.log(`error status : ${error.status} ${error.statusText} ${error.error.message}`);            
             switch (error.status) {
-              // case 401: //login  
-              // console.log("Token is "+token);
-              // if(token != "null"){
-              //   console.log("Route is " + route.url);
-              //   if ((route.url == "/" || route.url == '/login')) 
-              //   {
-              //     console.log("Route is home " + route.url);
-              //     if (error.error.message == "Invalid credentials") 
-              //     {
-              //       var errMsg = "User Name or Password Incorrect";
-              //       this._snackBar.open(errMsg, "Sorry", {
-              //         duration: 2000,
-              //         horizontalPosition: "right",
-              //         verticalPosition: "bottom"
-              //       });
-              //       this.connectorService.showError(errMsg);
-              //     }
-              //     handled = true;
-              //   } 
-              //   else if (error.error.message == "Invalid authentication token") 
-              //   {
-              //     console.log("Session invalide");
-              //     localStorage.setItem("backUrl", route.url);
-              //     console.log("Will Navigate to " + route.url);
-              //     this.router.navigate(["/"]);
-              //     this._snackBar.open("Your Session is Invalidated please Relogin to Access", "Sorry", {
-              //       duration: 2000,
-              //       horizontalPosition: "right",
-              //       verticalPosition: "bottom"
-              //     });
-              //     handled = true;
-              //   }
-              // }
-              // else{
-              //   this._snackBar.open("Something Went Wrong","Sorry");
-              // }
+              case 401: //login  
+              console.log("Token is "+token);
+              if(token != "null"){
+                console.log("Route is " + route.url);
+                if ((route.url == "/" || route.url == '/login')) 
+                {
+                  console.log("Route is home " + route.url);
+                  if (error.error.message == "Invalid credentials") 
+                  {
+                    var errMsg = "User Name or Password Incorrect";
+                    this._snackBar.open(errMsg, "Sorry", {
+                      duration: 2000,
+                      horizontalPosition: "right",
+                      verticalPosition: "bottom"
+                    });
+                    this.connectorService.showError(errMsg);
+                  }
+                  handled = true;
+                } 
+                else if (error.error.message == "Invalid authentication token") 
+                {
+                  console.log("Session invalide");
+                  localStorage.setItem("backUrl", route.url);
+                  console.log("Will Navigate to " + route.url);
+                  this.router.navigate(["/"]);
+                  this._snackBar.open("Your Session is Invalidated please Relogin to Access", "Sorry", {
+                    duration: 2000,
+                    horizontalPosition: "right",
+                    verticalPosition: "bottom"
+                  });
+                  handled = true;
+                }
+              }
+              else{
+                this._snackBar.open("Something Went Wrong","Sorry");
+              }
+              break;
               case 403: //forbidden
                 this.router.navigate(["/"]);
                 handled = true;

@@ -17,6 +17,7 @@ import { HttpClientModule,HTTP_INTERCEPTORS} from "@angular/common/http";
 import { DashboardComponent } from './PortfolioView/Pages/dashboard/dashboard.component';
 import { GlobalHttpInterceptorService } from "src/Services/global-http-interceptor.service";
 import { GlobalErrorHandlerService } from "src/Services/global-error-handler.service";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { GlobalErrorHandlerService } from "src/Services/global-error-handler.ser
     ReactiveFormsModule,
     FlexLayoutModule,
     HttpClientModule,
-
+    MatSnackBarModule
     
     
   ],
