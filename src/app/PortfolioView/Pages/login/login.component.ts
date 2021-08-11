@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/Services/login.service';
+import { GlobalErrorHandlerService } from 'src/Services/global-error-handler.service';
+import { MatSnackBar } from "@angular/material/snack-bar";
 import {
   FormGroup,
   FormControl,
@@ -21,12 +23,16 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup | any;
   hide = true;
   hideShowLoginContent: boolean = true;
+  myerr:any;
 
   constructor(
     private authenticationService: LoginService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private http: HttpClient
+    private connErr: GlobalErrorHandlerService,
+    private http: HttpClient  ,
+    // private _snackBar: MatSnackBar,
+
   ) {}
 
   showPasswordValidationPage() {
@@ -34,7 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.myerr = "";
+    this.myerr = "";
     // localStorage.removeItem("Token");
     // localStorage.removeItem("isLoggedIn");
     this.loginForm = this.formBuilder.group({
@@ -65,16 +71,17 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log('ddd',this.f.username.value,this.f.password.value);   
+    console.log('ddd',this.f.username.value,this.f.password.value);
+    
     this.authenticationService
       .validateUser(this.f.username.value, this.f.password.value)
-      .subscribe((user: any) => {
+      .subscribe((user: any ) => {
         console.log('ddd');
         console.log(user,"dsdd")
         // console.log(user.body.authorities[0].name,"data")
         localStorage.setItem('isLoggedIn', 'true');
         
-  var role=user.body.roles[0];
+        var role=user.body.roles[0];
         // var role = user.body.authorities[0].name;
 
         if (
@@ -96,6 +103,17 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl(this.navigateTo);
           localStorage.removeItem('backUrl');
         }
+          // else {
+          //   this.myerr = "You are not Authenticated User.";
+          //   this.openSnackBar();
+          // }
       });
   }
+  // openSnackBar() {
+  //   this._snackBar.open("You are not Authenticated User.", "Sorry", {
+  //     duration: 2000,
+  //     horizontalPosition: "right",
+  //     verticalPosition: "bottom",
+  //   });
+  // }
 }
