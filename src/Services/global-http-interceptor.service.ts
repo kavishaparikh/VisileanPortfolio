@@ -59,11 +59,16 @@ export class GlobalHttpInterceptorService {
               console.log("Token is "+token);
               if(token != "null"){
                 console.log("Route is " + route.url);
-                if ((route.url == "/" || route.url == '/login')) 
+                if ((route.url == "/" )) 
                 {
                   console.log("Route is home " + route.url);
-                  if (error.error.message == "Invalid credentials") 
+                  console.log("error.error",error.error.message);
+                  
+
+                  if (error.error.message == "Error: Unauthorized") 
                   {
+                    console.log("dshkbfs");
+                    
                     var errMsg = "User Name or Password Incorrect";
                     this._snackBar.open(errMsg, "Sorry", {
                       duration: 2000,
@@ -79,7 +84,7 @@ export class GlobalHttpInterceptorService {
                   console.log("Session invalide");
                   localStorage.setItem("backUrl", route.url);
                   console.log("Will Navigate to " + route.url);
-                  this.router.navigate(["/"]);
+                  this.router.navigate(["/"]) ;
                   this._snackBar.open("Your Session is Invalidated please Relogin to Access", "Sorry", {
                     duration: 2000,
                     horizontalPosition: "right",
